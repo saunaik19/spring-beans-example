@@ -1,4 +1,4 @@
-package com.springbeans.example.springbeansexample.beans;
+package com.springbeans.example.springbeans.beans;
 
 
 import org.springframework.context.annotation.Scope;

@@ -1,9 +1,13 @@
-package com.springbeans.example.springbeansexample.config;
+package com.springbeans.example.springbeans.config;
 
-import com.springbeans.example.springbeansexample.beans.SampleBean;
+import com.springbeans.example.springbeans.beans.ConfigDependentBean;
+import com.springbeans.example.springbeans.beans.ConfigDependentPrototypeBean;
+import com.springbeans.example.springbeans.beans.PrototypeDemo;
+import com.springbeans.example.springbeans.beans.SampleBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 @Configuration
 public class AppConfig {
@@ -13,7 +17,7 @@ public class AppConfig {
         return new SampleBean();
     }
     Caused by: org.springframework.beans.factory.NoUniqueBeanDefinitionException:
-    No qualifying bean of type 'com.springbeans.example.springbeansexample.beans.SampleBean'
+    No qualifying bean of type 'SampleBean'
      available: expected single matching bean but found 2: sampleBean,createBean
 
    */
@@ -32,9 +36,21 @@ public class AppConfig {
        springbeansexample\beans\SampleBean.class] and overriding is disabled.
      */
 
+  //  @Bean No qualifying bean of type 'com.springbeans.example.springbeans.beans.PrototypeDemo'
+  //  available: expected single matching bean but found 2:
+  //  prototypeDemo,somedifferentBeanProtoType
+    public PrototypeDemo somedifferentBeanProtoType(){
+        return new PrototypeDemo();
+    }
+
     @Bean
-    @Qualifier("qualifierChiKrupa")
-    public SampleBean somedifferentBean(){
-        return new SampleBean();
+    public ConfigDependentBean configDependentBean(){
+        return new ConfigDependentBean();
+    }
+
+    @Bean
+    @Scope("prototype")
+    public ConfigDependentPrototypeBean configDependentPrototypeBean(){
+        return new ConfigDependentPrototypeBean();
     }
 }
