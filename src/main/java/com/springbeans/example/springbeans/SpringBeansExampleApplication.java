@@ -4,6 +4,9 @@ import com.springbeans.example.springbeans.beans.ConfigDependentBean;
 import com.springbeans.example.springbeans.beans.ConfigDependentPrototypeBean;
 import com.springbeans.example.springbeans.beans.PrototypeDemo;
 import com.springbeans.example.springbeans.beans.SampleBean;
+import com.springbeans.example.springbeans.questions.NewStudent;
+import com.springbeans.example.springbeans.questions.School;
+import com.springbeans.example.springbeans.questions.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -47,6 +50,45 @@ public class SpringBeansExampleApplication implements CommandLineRunner {
         ConfigDependentPrototypeBean configDependentPrototypeBean2 = applicationContext.getBean(ConfigDependentPrototypeBean.class);
         ConfigDependentPrototypeBean configDependentPrototypeBean3 = applicationContext.getBean(ConfigDependentPrototypeBean.class);
         System.out.println(configDependentPrototypeBean.hashCode()+" === " + configDependentPrototypeBean2.hashCode() + " === " + configDependentPrototypeBean3.hashCode());
+
+        System.out.println("________________________________Singleton test-------------------------------------");
+
+        Student student=applicationContext.getBean("student",Student.class);
+        student.setStudentName("Saurabh");
+        System.out.println("student= "+student.toString());
+        Student student2=applicationContext.getBean("student",Student.class);
+        student2.setStudentName("Pradnya");
+        System.out.println("student2= "+student2.toString()+"  "+"student= "+student.toString() );
+        System.out.println("\n \t look into prototype...");
+
+        NewStudent newStudent=applicationContext.getBean(NewStudent.class);
+        newStudent.setStudentName("Saurabh");
+        NewStudent newStudent2=applicationContext.getBean(NewStudent.class);
+        newStudent2.setStudentName("Pradnya");
+        System.out.println("newStudent= "+student2.toString()+"  "+"student= "+student.toString() );
+
+        System.out.println("________________________________prototype inside Singleton  test-------------------------------------");
+
+        School school=applicationContext.getBean(School.class);
+        NewStudent newSchoolStudent1=school.getNewStudent();
+        NewStudent newSchoolStudent2=school.getNewStudent();
+        NewStudent newSchoolStudent3=school.getNewStudent();
+        newSchoolStudent1.setStudentName("Bokya");
+        newSchoolStudent2.setStudentName("Rocky");
+        newSchoolStudent3.setStudentName("Mickey");
+        school.setNewStudent(newSchoolStudent1);
+        System.out.println("school students "+newSchoolStudent1.hashCode()+ " "+newSchoolStudent2.hashCode()+ " "+newSchoolStudent3.hashCode() );
+
+        school.getNewStudent().setStudentName("kaka");
+        System.out.println(school.toString());
+
+        System.out.println("same student object in all references in school.....");
+        System.out.println("How to solve this???");
+        System.out.println("proxy objects ");
+        System.out.println("add scope=prototype , proxyMode=ScopedProxyMode.TARGET_CLASS in annotation");
+
+
+
 
     }
 }

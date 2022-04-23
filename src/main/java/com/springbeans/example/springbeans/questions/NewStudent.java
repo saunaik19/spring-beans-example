@@ -2,15 +2,18 @@ package com.springbeans.example.springbeans.questions;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 @Component
-@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-public class Student {
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE,proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class NewStudent {
     private String studentName;
 
-    public Student() {
-        System.out.println("Student constructor called....");
+    public NewStudent() {
+        System.out.println("NewStudent constructor called...."+this.hashCode());
     }
 
     public String getStudentName() {
@@ -23,7 +26,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "NewStudent{" +
                 "studentName='" + studentName + '\'' +
                 '}';
     }
