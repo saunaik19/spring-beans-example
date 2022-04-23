@@ -88,7 +88,9 @@ public class SpringBeansExampleApplication implements CommandLineRunner {
         System.out.println("add scope=prototype , proxyMode=ScopedProxyMode.TARGET_CLASS in annotation");
 
 
-
+        System.out.println("Spring cglib magic.....");
+        System.out.println("school students "+school.getStudentSpring().hashCode()+ " " +
+                ""+school.getStudentSpring().hashCode());
 
     }
 }
