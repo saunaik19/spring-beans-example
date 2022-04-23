@@ -1,20 +1,13 @@
 package com.springbeans.example.springbeans;
 
-import com.springbeans.example.springbeans.beans.ConfigDependentBean;
-import com.springbeans.example.springbeans.beans.ConfigDependentPrototypeBean;
-import com.springbeans.example.springbeans.beans.PrototypeDemo;
-import com.springbeans.example.springbeans.beans.SampleBean;
-import com.springbeans.example.springbeans.questions.NewStudent;
-import com.springbeans.example.springbeans.questions.School;
-import com.springbeans.example.springbeans.questions.Student;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
-public class SpringBeansExampleApplication implements CommandLineRunner {
+public class SpringBeansExampleApplication /*implements CommandLineRunner*/ {
 
     @Autowired
     ApplicationContext applicationContext;
@@ -25,8 +18,8 @@ public class SpringBeansExampleApplication implements CommandLineRunner {
 
 
     }
-
-    @Override
+/*
+  //  @Override
     public void run(String... args)  {
         SampleBean bean = applicationContext.getBean(SampleBean.class);
         SampleBean bean2 = applicationContext.getBean("sampleBean", SampleBean.class);
@@ -93,4 +86,6 @@ public class SpringBeansExampleApplication implements CommandLineRunner {
                 ""+school.getStudentSpring().hashCode());
 
     }
+
+ */
 }
