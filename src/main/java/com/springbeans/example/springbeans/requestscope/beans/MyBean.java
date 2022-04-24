@@ -6,10 +6,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Component
 //@Scope(value = "request",proxyMode = ScopedProxyMode.TARGET_CLASS)//to fool controller
-@Scope(value = WebApplicationContext.SCOPE_REQUEST,proxyMode = ScopedProxyMode.TARGET_CLASS)//this is standard way
+//@Scope(value = WebApplicationContext.SCOPE_REQUEST,proxyMode = ScopedProxyMode.TARGET_CLASS)//this is standard way
+@RequestScope(proxyMode =ScopedProxyMode.TARGET_CLASS)
 public class MyBean {
 
     public MyBean(){
